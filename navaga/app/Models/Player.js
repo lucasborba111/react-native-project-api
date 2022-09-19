@@ -7,6 +7,9 @@ class Player extends Model {
     users() {
         return this.belongsTo('App/Models/User')
     }
+    images() {
+        return this.hasOne('App/Models/Image')
+    }
 }
 
 module.exports = Player

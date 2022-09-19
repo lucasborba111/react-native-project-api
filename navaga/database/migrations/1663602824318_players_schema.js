@@ -10,6 +10,7 @@ class PlayersSchema extends Schema {
         table.integer('user_id').unsigned().references('id').inTable('users').onUpdate('CASCADE').onDelete('CASCADE')
         table.string('nickname').notNullable()
         table.string('position')
+        table.timestamps()
     })
 }
 down(){
