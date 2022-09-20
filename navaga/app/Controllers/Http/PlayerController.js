@@ -27,7 +27,15 @@ class PlayerController {
     return player
   }
 
-  async update ({ params, request, response }) {
+  async update ({ auth,params, request, response }) {
+    const player = await Player.findOrFail(params.id)
+    if(player.user_id !== auth.user.id){
+      return response.status(401).send({error: 'not authorized'})
+    }
+    const data = request.only(['nickname', 'position'])
+    player.merge(data)
+    await player.save()
+    return player
   }
 
   async destroy ({ params , auth, response }) {
