@@ -14,7 +14,11 @@ class PlayerController {
     return players
   }
 
-  async store ({ request, response }) {
+  async store ({ auth ,request, response }) {
+    const id = auth.user
+    const data = request.only(['nickname', 'position'])
+    const player = await Player.create({...data, user_id: id})
+    return player
   }
 
   async show ({params}) {
@@ -26,7 +30,13 @@ class PlayerController {
   async update ({ params, request, response }) {
   }
 
-  async destroy ({ params , request, response }) {
+  async destroy ({ params , auth, response }) {
+    const player = await Player.findOrFail(params.id)
+
+    if(player.user_id !== auth.user.id){
+      return response.status(401).send({error: 'not authorized'})
+    }
+    await player.delete()
   }
 }
 
