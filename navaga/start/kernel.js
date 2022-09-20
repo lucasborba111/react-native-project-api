@@ -3,6 +3,10 @@
 /** @type {import('@adonisjs/framework/src/Server')} */
 const Server = use('Server')
 
+Server.registerNamed({
+  auth: () => import('App/Middleware/Auth')
+})
+
 /*
 |--------------------------------------------------------------------------
 | Global Middleware

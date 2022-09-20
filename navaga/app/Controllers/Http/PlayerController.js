@@ -15,7 +15,7 @@ class PlayerController {
   }
 
   async store ({ auth ,request, response }) {
-    const id = auth.user
+    const id = auth.user.id
     const data = request.only(['nickname', 'position'])
     const player = await Player.create({...data, user_id: id})
     return player
