@@ -10,6 +10,9 @@ class Player extends Model {
     images() {
         return this.hasOne('App/Models/Image')
     }
+    statistictable(){
+        return this.hasOne('App/Models/StatisticTable')
+    }
 }
 
 module.exports = Player
