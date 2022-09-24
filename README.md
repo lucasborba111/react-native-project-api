@@ -1,4 +1,4 @@
-<h1>Projeto React-Native API</h1>
+<h1>Projeto React-Native - API</h1>
 
 <h3>Adonis.js</h3>
 
