@@ -14,11 +14,17 @@ class PlayerController {
     return players
   }
 
-  async store ({ auth ,request, response }) {
+  async store ({ auth,params ,request, response }) {
     const id = auth.user.id
-    const data = request.only(['nickname', 'position'])
-    const player = await Player.create({...data, user_id: id})
-    return player
+    const exist = await Player.findBy('user_id', id)
+
+    if (exist) {
+      return response.status(401).send({error: 'Você já possui um perfil'})
+    } else {
+          const data = request.only(['nickname', 'position'])
+          const player = await Player.create({...data, user_id: id})
+          return player
+    }
   }
 
   async show ({params}) {
